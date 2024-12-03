@@ -4,12 +4,17 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const PORT = process.env.PORT || 8080;
 const uri = process.env.MONGO_URI;
+const YAML = require('yamljs');
+const swaggerUI = require('swagger-ui-express');
+const swaggerDocument = YAML.load('./swagger.yaml');
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.use(express.static('public'));
 
+//Serve the definition file
+app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+app.use(express.static('public'));
 
 //Connect to MongoDB
 mongoose.connect(uri).then(
