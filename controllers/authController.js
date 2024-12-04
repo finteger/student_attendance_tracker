@@ -7,8 +7,7 @@ const AttendanceManager = require('../models/attendanceManager.js');
 exports.register = async (req, res) =>{
 
    const {email, password, confirmPassword} = req.body;
-
-
+ 
     try {
 
         const existingUser = await mongoose.findOne({email});
@@ -25,7 +24,7 @@ exports.register = async (req, res) =>{
 
         const newUser = new AttendanceManager({
             email,
-            password: hashPassword,
+            password: hashPassword
         });
 
         await newUser.save();
