@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
+const AttendanceManager = require('../models/attendanceManager.js');
 
 
 exports.register = async (req, res) =>{
@@ -23,14 +24,16 @@ exports.register = async (req, res) =>{
         const hashPassword = await bcrypt.hash(password, 12);
 
         const newUser = new AttendanceManager({
-
-
+            email,
+            password: hashPassword,
         });
 
+        await newUser.save();
+
+        res.redirect('/login');
 
     } catch (error) {
-
-        
+        return res.status(500).send('Internal Server Error');
     }
 
 }
