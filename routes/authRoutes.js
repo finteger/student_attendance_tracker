@@ -8,7 +8,7 @@ router.get('/register', (req, res) =>{ res.render('register')});
 
 //map to controller actions
 //router.post('/login', authController.login);
-//router.post('/register', authController.register);
+router.post('/register', authController.register);
 //router.post('/logout', authController.logout);
 
 module.exports = router;
