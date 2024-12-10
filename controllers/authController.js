@@ -13,6 +13,7 @@ exports.register = async (req, res) =>{
         const existingUser = await AttendanceManager.findOne({email});
 
         if(existingUser){
+            
             return res.status(400).send('User already exists.  Please try again.');
         }
 
