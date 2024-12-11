@@ -42,8 +42,9 @@ exports.login = async (req, res) =>{
 
     const {email, password} = req.body;
 
+
     try {
-      const user = await AttendanceManager.find({email});
+      const user = await AttendanceManager.findOne({email});
 
       if(!user){
         return res.status(404).send('User not found');
@@ -51,6 +52,7 @@ exports.login = async (req, res) =>{
 
       //Verify the password using bcrypt
       const result = await bcrypt.compare(password, user.password);
+      
 
       if(!result){
         return res.status(401).send('Password does not match or is invalid.');
