@@ -5,14 +5,12 @@ exports.getHome = async (req, res) =>{
     try {
         const students = await StudentRecord.find({});
 
-        const maxAttendanceCount = students ? students.attendance.length : 0;
-
-    
+        const maxAttendanceCount = students ? students.length : 0;
 
         res.render('attendance.ejs', {students, maxAttendanceCount});
 
     } catch (error) {
-        return res.status(500).send('Internal Server Error');
+        return res.status(500).send(`Internal Server Error: ${error}`);
     }
 
 }
