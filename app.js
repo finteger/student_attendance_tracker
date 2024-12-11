@@ -21,7 +21,7 @@ app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use(cookieParser);
+app.use(cookieParser());
 app.use('/', authRoutes);
 app.use('/', studentRoutes);
 

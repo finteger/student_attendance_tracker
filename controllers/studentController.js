@@ -7,7 +7,7 @@ exports.getHome = async (req, res) =>{
 
         const maxAttendanceCount = students ? students.attendance.length : 0;
 
-        console.log(maxAttendanceCount);
+    
 
         res.render('attendance.ejs', {students, maxAttendanceCount});
 

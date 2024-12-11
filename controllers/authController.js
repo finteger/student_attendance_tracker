@@ -50,7 +50,7 @@ exports.login = async (req, res) =>{
       }
 
       //Verify the password using bcrypt
-      const result = await bcrypt.verify(password, user.password);
+      const result = await bcrypt.compare(password, user.password);
 
       if(!result){
         return res.status(401).send('Password does not match or is invalid.');
