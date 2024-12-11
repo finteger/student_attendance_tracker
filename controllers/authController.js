@@ -39,6 +39,7 @@ exports.register = async (req, res) =>{
 }
 
 exports.login = async (req, res) =>{
+
     const {email, password} = req.body;
 
     try {
@@ -55,8 +56,18 @@ exports.login = async (req, res) =>{
         return res.status(401).send('Password does not match or is invalid.');
       }
 
+      //Generate a JWT
+      const token = jwt.sign({id: user._id }, 'secret_key',{ expiresIn: '5m' });
+
+      //Throw the JWT inside a cookie
+      //res.cookie
+      res.cookie('jwt', token, {maxAge: 5 * 60 * 1000, httpOnly: true});
+
+      //redirect to home
+      res.redirect('/home');
+
     } catch (error) {
-        
+      return res.status(500).send(`Internal Server Error: ${error}`);
     }
 
 }
